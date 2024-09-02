@@ -1,8 +1,12 @@
 //@ts-check
 
-class User {
+export default class User {
   #_name;
   #_age;
+  constructor(name, age) {
+    this.#_name = name;
+    this.#_age = age;
+  }
   getName() {
     this.#_name;
   }
@@ -13,3 +17,5 @@ class User {
     return `Name: ${this.#_name} Age: ${this.#_age}`;
   }
 }
+const PI = 3.14;
+// module.exports = { User, PI };
