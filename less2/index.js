@@ -15,14 +15,37 @@
 //   console.log("i am promise");
 // });
 // console.log("end");
-import EventEmmiter from "events";
+import EventEmitter from "events";
 
-const emitter = new EventEmmiter();
-emitter.on("on_click", (color) => {
-  console.log(`clicked event. Color: ${color}`);
-});
+const listener1 = () => {
+  console.log("I am l1");
+};
+const listener2 = () => {
+  console.log("I am l2");
+};
+const listener3 = () => {
+  console.log("I am l3");
+};
 
-emitter.emit("on_click2", "red");
+const emitter = new EventEmitter();
+emitter.setMaxListeners(100);
+emitter.on("on_click", listener1);
+emitter.addListener("on_click", listener2);
+emitter.on("on_click", listener3);
+//emitter.removeAllListeners("on_click");
+emitter.emit("on_click");
+emitter.on("double_click", listener3);
+console.log(
+  "Count listeners for double_click: " + emitter.listenerCount("on_click")
+);
+console.log(emitter.eventNames());
+// emitter.emit("on_click");
+// emitter.off("on_click", listener2);
+// emitter.emit("on_click");
+// emitter.removeListener("on_click", listener1);
+// emitter.emit("on_click");
+
+console.log(emitter.getMaxListeners());
 
 /*
 Створити класса Buyer (поля: name, email)
