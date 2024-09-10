@@ -15,7 +15,7 @@
 //   console.log("i am promise");
 // });
 // console.log("end");
-import EventEmitter from "events";
+import EventEmitter from "node:events";
 
 const listener1 = () => {
   console.log("I am l1");
