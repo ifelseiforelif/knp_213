@@ -21,6 +21,6 @@ const buff = Buffer.from("NODEJS Programm");
 //fs.writeFile("D:\\test\\data.txt", buff)
 fs.writeFile(pathToFile, buff)
   .then(() => {
-    console.log("Файл усішно записан");
+    console.log("Файл успішно записан");
   })
   .catch((err) => console.log(err));
