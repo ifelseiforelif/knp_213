@@ -4,6 +4,7 @@ import { users } from "../data/users.js";
 import { authUser } from "../middlewars/authuser-middleware.js";
 import path from "node:path";
 import multer from "multer";
+import nodemailer from "nodemailer";
 
 const storage = multer.diskStorage({
   destination: "photos/",
@@ -51,4 +52,48 @@ userRoutes.get("/logout", (req, res) => {
 userRoutes.get("/list", (req, res) => {
   res.render("list_of_users", { users });
 });
+
+userRoutes
+  .route("/feedback")
+  .get((req, res) => {
+    res.render("feedback");
+  })
+  .post((req, res) => {
+    if (req.body && req.body.email && req.body.theme && req.body.message) {
+      const { email, theme, message } = req.body;
+      let trans = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 587,
+        auth: {
+          user: "natapervomaisk88@gmail.com",
+          pass: "",
+        },
+        tls: {
+          rejectUnauthorized: true,
+          minVersion: "TLSv1.2",
+        },
+      });
+      let mailOpt = {
+        from: "Natalya Babenko <email>",
+        to: email,
+        subject: theme,
+        text: message,
+      };
+      trans.sendMail(mailOpt, (err, info) => {
+        console.log(err, info);
+        if (err) {
+          result = { status: "Error" };
+        } else {
+          {
+            result = { status: "OK" };
+          }
+        }
+        console.log("Result: ", result);
+        res.redirect("/");
+      });
+    } else {
+      res.redirect("/");
+    }
+  });
+
 export default userRoutes;
