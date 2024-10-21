@@ -7,5 +7,13 @@ class Product {
             return res;
         });
     }
+    createProduct(product) {
+        connectDb.query("INSERT INTO products(title, price) VALUES(?,?)", [product.title, product.price], (err, res) => {
+            if (err)
+                throw new Error("db error");
+            console.log(res);
+            return res;
+        });
+    }
 }
 export default new Product();

@@ -6,9 +6,8 @@ POST https://127.0.0.1/products HTTP/1.1
 content-type: application/json
 
 {
-    "id":23,
-    "title":"test product", 
-    "price":34 
+    "title":"bread", 
+    "price":878
 }
 
 

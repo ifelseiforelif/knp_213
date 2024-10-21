@@ -14,16 +14,8 @@ const productRouter = Router();
 
 productRouter
   .route("/")
-  .get(
-    productController.getAllProduct,
-    (req: Request, res: Response<Array<IProduct>>) => {
-      // res.status(200).json(products);
-    }
-  )
-  .post((req: BodyType<IProduct>, res: Response) => {
-    products.push(req.body);
-    res.status(201).json(req.body);
-  });
+  .get(productController.getAllProduct)
+  .post(productController.createProduct);
 
 productRouter
   .route("/:id")

@@ -4,13 +4,8 @@ import { products, } from "../data/products.js";
 const productRouter = Router();
 productRouter
     .route("/")
-    .get(productController.getAllProduct, (req, res) => {
-    // res.status(200).json(products);
-})
-    .post((req, res) => {
-    products.push(req.body);
-    res.status(201).json(req.body);
-});
+    .get(productController.getAllProduct)
+    .post(productController.createProduct);
 productRouter
     .route("/:id")
     .put((req, res) => {
