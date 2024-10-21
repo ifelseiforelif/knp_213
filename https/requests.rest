@@ -1,0 +1,27 @@
+GET https://127.0.0.1/products HTTP/1.1
+
+###
+
+POST https://127.0.0.1/products HTTP/1.1
+content-type: application/json
+
+{
+    "id":23,
+    "title":"test product", 
+    "price":34 
+}
+
+
+###
+
+PUT https://127.0.0.1/products/2 HTTP/1.1
+content-type: application/json
+
+{
+    "title":"update2 product", 
+    "price":123 
+}
+
+###
+
+DELETE https://127.0.0.1/products/2 HTTP/1.1
