@@ -12,3 +12,12 @@ content-type: application/json
 ###
 
 GET http://localhost:3000/category/2 HTTP/1.1
+
+###
+
+POST https://localhost/user HTTP/1.1
+content-type: application/json
+
+{
+    "login": "admin"
+}

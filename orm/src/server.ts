@@ -5,6 +5,7 @@ import "dotenv/config";
 import https from "node:https";
 import fs from "node:fs";
 import path from "node:path";
+import { userRouter } from "./routes/user-routes";
 const server = express();
 const PORT = process.env.PORT || 443;
 connection
@@ -17,6 +18,8 @@ connection
     };
     server.use(express.json());
     server.use("/category", categoryRouter);
+    server.use("/user", userRouter);
+
     https
       .createServer(options, server)
       .listen(PORT, () =>
