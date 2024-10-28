@@ -3,7 +3,7 @@ import { User } from "../models/user-model";
 
 export class UserController {
   static async create(
-    req: Request<{}, {}, { login: string }>,
+    req: Request<{}, {}, { login: string; role: string }>,
     res: Response
   ): Promise<any> {
     const user = await User.create({ ...req.body });

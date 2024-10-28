@@ -19,5 +19,6 @@ POST https://localhost/user HTTP/1.1
 content-type: application/json
 
 {
-    "login": "admin"
+    "login": "alex",
+    "role": "manager"
 }
