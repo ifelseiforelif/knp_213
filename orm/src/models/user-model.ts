@@ -1,11 +1,4 @@
-import {
-  Model,
-  Table,
-  Column,
-  DataType,
-  HasMany,
-  Default,
-} from "sequelize-typescript";
+import { Model, Table, Column, DataType, HasMany } from "sequelize-typescript";
 import { Post } from "./post-model";
 import { v4 as uuidv4 } from "uuid";
 
@@ -22,9 +15,9 @@ enum UserRole {
   updatedAt: "updated_at",
 })
 export class User extends Model {
-  @Default(uuidv4())
   @Column({
     type: DataType.UUID,
+    defaultValue: uuidv4(),
     primaryKey: true,
   })
   id!: string;
@@ -38,19 +31,20 @@ export class User extends Model {
 
   @Column({
     type: DataType.ENUM(...Object.values(UserRole)),
+    defaultValue: UserRole.GUEST,
     allowNull: false,
   })
   role!: UserRole;
 
-  @Default(DataType.NOW)
   @Column({
     type: DataType.DATE,
+    defaultValue: DataType.NOW,
   })
   created_at!: Date;
 
-  @Default(DataType.NOW)
   @Column({
     type: DataType.DATE,
+    defaultValue: DataType.NOW,
   })
   updated_at!: Date;
 

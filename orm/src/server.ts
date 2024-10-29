@@ -6,10 +6,11 @@ import https from "node:https";
 import fs from "node:fs";
 import path from "node:path";
 import { userRouter } from "./routes/user-routes";
+import { postRouter } from "./routes/post-routes";
 const server = express();
 const PORT = process.env.PORT || 443;
 connection
-  .sync()
+  .sync({ alter: true, force:true })
   .then(() => {
     console.log("dbconnection successfully");
     const options = {
@@ -19,6 +20,7 @@ connection
     server.use(express.json());
     server.use("/category", categoryRouter);
     server.use("/user", userRouter);
+    server.use("/post", postRouter);
 
     https
       .createServer(options, server)
