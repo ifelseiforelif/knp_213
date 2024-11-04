@@ -27,7 +27,7 @@ export class UserController {
         .status(200)
         .json({ message: "All data", data: JSON.parse(usersFromRedis) });
     }
-    const users = await User.findAll({ include: Post });
+    const users = await User.scope("adminUser").findAll({ include: Post });
     if (users) {
       await client.set("users", JSON.stringify(users), { EX: 120 });
       return res.status(200).json({ message: "All data", data: users });

@@ -21,6 +21,13 @@ enum UserRole {
   timestamps: true,
   createdAt: "created_at",
   updatedAt: "updated_at",
+  scopes: {
+    adminUser: {
+      where: {
+        role: UserRole.ADMIN,
+      },
+    },
+  },
 })
 export class User extends Model {
   @Column({
