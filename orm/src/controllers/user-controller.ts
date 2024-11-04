@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { User } from "../models/user-model";
 import { Post } from "../models/post-model";
+import { client } from "../config/redis";
 
 export class UserController {
   static async create(
@@ -19,11 +20,18 @@ export class UserController {
   }
 
   static async readAll(req: Request, res: Response): Promise<any> {
+    const usersFromRedis = await client.get("users");
+    if (usersFromRedis) {
+      console.log("reading cache...");
+      return res
+        .status(200)
+        .json({ message: "All data", data: JSON.parse(usersFromRedis) });
+    }
     const users = await User.findAll({ include: Post });
     if (users) {
+      await client.set("users", JSON.stringify(users), { EX: 120 });
       return res.status(200).json({ message: "All data", data: users });
-    } else {
-      return res.status(500).json({ message: "Error" });
     }
+    return res.status(500).json({ message: "Error" });
   }
 }

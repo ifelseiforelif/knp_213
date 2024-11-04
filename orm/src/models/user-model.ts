@@ -1,6 +1,14 @@
-import { Model, Table, Column, DataType, HasMany } from "sequelize-typescript";
+import {
+  Model,
+  Table,
+  Column,
+  DataType,
+  HasMany,
+  HasOne,
+} from "sequelize-typescript";
 import { Post } from "./post-model";
 import { v4 as uuidv4 } from "uuid";
+import { Profile } from "./profile-model";
 
 enum UserRole {
   ADMIN = "admin",
@@ -50,4 +58,7 @@ export class User extends Model {
 
   @HasMany(() => Post)
   posts!: Post[];
+
+  @HasOne(() => Profile)
+  profile!: Profile;
 }
