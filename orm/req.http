@@ -1,0 +1,41 @@
+###
+
+POST https://localhost/user HTTP/1.1
+content-type: application/json
+
+{
+    "login": "Oleg",
+    "role": "user"
+}
+
+###
+GET https://localhost/user HTTP/1.1
+
+###
+
+POST https://localhost/post HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Post #3",
+    "description": "Description for Post #3",
+    "user_id": "4a33861e-715a-4039-89a9-2e578e098f6b"
+}
+
+###
+GET https://localhost/post HTTP/1.1
+
+
+
+###
+
+POST https://localhost/profile HTTP/1.1
+content-type: application/json
+
+{
+    "detail_info": "Info about user",
+    "user_id": "4a33861e-715a-4039-89a9-2e578e098f6b"
+}
+
+###
+GET https://localhost/profile HTTP/1.1
